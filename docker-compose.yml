@@ -37,6 +37,16 @@ services:
       timeout: 10s
       retries: 3
       start_period: 5m
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner    
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - gitlab-runner:/etc/gitlab-runner'
+
     environment:
     - DEBUG=false
 
@@ -162,3 +172,4 @@ volumes:
   redis-data:
   postgresql-data:
   gitlab-data:
+  gitlab-runner:
